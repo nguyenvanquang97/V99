@@ -15,6 +15,7 @@ import ShopList from "app/screens/Home/components/FeatureShopList";
 import ComboProduct from "app/screens/Home/components/ComboProduct";
 import {GetSettings} from "app/store/actions/settingActions";
 import KeepGoing from "app/screens/Home/KeepGoing";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const HomeScreen = (props) => {
 	const dispatch = useDispatch();
@@ -87,10 +88,10 @@ const HomeScreen = (props) => {
 	useEffect(() => {
 			dispatch(GetSettings());
 	}, [refresh]);
-
+	const insets = useSafeAreaInsets();
 	return (
-		<View style={tw`flex bg-gray-100 min-h-full`}>
-			<StatusBar barStyle={"dark-content"} backgroundColor={"#FFFFFF"}/>
+		<View style={{paddingTop:insets.top,...tw`flex bg-gray-100 min-h-full`}}>
+			<StatusBar barStyle={"dark-content"}/>
 			<View style={[tw`${Platform.OS === 'android' ? 'pt-4' : 'pt-14'} pb-2 px-3 bg-white shadow-lg`]}>
 				<View style={tw`flex flex-row items-center justify-between`}>
 					<View>

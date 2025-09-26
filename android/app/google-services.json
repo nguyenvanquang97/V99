@@ -1,26 +1,43 @@
 {
   "project_info": {
-    "project_number": "837655896323",
-    "project_id": "bbherb-98b6d",
-    "storage_bucket": "bbherb-98b6d.firebasestorage.app"
+    "project_number": "115734219218",
+    "project_id": "daivietgroup-a9bb9",
+    "storage_bucket": "daivietgroup-a9bb9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:837655896323:android:22961c335cb1ef68ab4936",
+        "mobilesdk_app_id": "1:115734219218:android:e0e323a69bd4dda788600b",
         "android_client_info": {
-          "package_name": "com.brs.bbherb"
+          "package_name": "com.ecommerce.nutriv99"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "115734219218-0lglc8qr23co8tvco8iq5opii69d39fm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDuKF3u9mGCYpXMmZdbPdsaceeReQowpW4"
+          "current_key": "AIzaSyBL4l6XghdvJeFYN0nrgqToLoRkyj-oyi4"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115734219218-0lglc8qr23co8tvco8iq5opii69d39fm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "115734219218-29pglh01lue5l7613i346jbm1i58cqh0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.brandsign.ecommerce.DaiViet"
+              }
+            }
+          ]
         }
       }
     }

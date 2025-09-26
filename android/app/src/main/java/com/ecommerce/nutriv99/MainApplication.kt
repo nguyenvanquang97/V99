@@ -1,4 +1,4 @@
-package com.brs.bbherb
+package com.ecommerce.nutriv99
 
 import android.app.Application
 import com.facebook.react.PackageList

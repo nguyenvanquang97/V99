@@ -12,7 +12,8 @@ export const RootStackScreen = () => {
 			headerMode={"none"}
 			screenOptions={{
 				animationTypeForReplace: 'pop',
-				animationEnabled: true
+				animationEnabled: true,
+				headerShown: false
 			}}
 			mode={"modal"}
 		>
