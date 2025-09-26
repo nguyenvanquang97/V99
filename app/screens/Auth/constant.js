@@ -1,0 +1,21 @@
+export const LOGIN = 'LOGIN';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
+
+export const REGISTER = 'REGISTER';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAILED = 'REGISTER_FAILED';
+
+export const LOGOUT = 'LOGOUT';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILED = 'LOGOUT_FAILED';
+
+export const GET_ME = 'GET_ME';
+export const GET_ME_SUCCESS = 'GET_ME_SUCCESS';
+export const GET_ME_FAILED = 'GET_ME_FAILED';
+
+export const USER_DATA = 'USER_DATA';
+
+export const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT';
+export const UPDATE_ACCOUNT_SUCCESS = 'UPDATE_ACCOUNT_SUCCESS';
+export const UPDATE_ACCOUNT_FAILED = 'UPDATE_ACCOUNT_FAILED';

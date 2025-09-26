@@ -1,0 +1,142 @@
+diff --git a/node_modules/react-native-qrcode-scanner/index.js b/node_modules/react-native-qrcode-scanner/index.js
+index 1234567..abcdefg 100644
+--- a/node_modules/react-native-qrcode-scanner/index.js
++++ b/node_modules/react-native-qrcode-scanner/index.js
+@@ -1,6 +1,6 @@
+ 'use strict';
+ 
+-import { RNCamera as Camera } from 'react-native-camera';
++import { Camera } from 'react-native-vision-camera';
+ import { PermissionsAndroid, Platform, Vibration } from 'react-native';
+ import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
+ import PropTypes from 'prop-types';
+@@ -17,7 +17,7 @@ class QRCodeScanner extends Component {
+   static propTypes = {
+     onRead: PropTypes.func.isRequired,
+     reactivate: PropTypes.bool,
+-    reactivateTimeout: PropTypes.number,
++    reactivateTimeout: PropTypes.number, 
+     fadeIn: PropTypes.bool,
+     showMarker: PropTypes.bool,
+     cameraType: PropTypes.oneOf(['front', 'back']),
+@@ -25,7 +25,7 @@ class QRCodeScanner extends Component {
+     customMarker: PropTypes.element,
+     containerStyle: PropTypes.any,
+     cameraStyle: PropTypes.any,
+-    cameraProps: PropTypes.object,
++    cameraProps: PropTypes.object, 
+     markerStyle: PropTypes.any,
+     topViewStyle: PropTypes.any,
+     bottomViewStyle: PropTypes.any,
+@@ -35,7 +35,7 @@ class QRCodeScanner extends Component {
+     checkAndroid6Permissions: PropTypes.bool,
+     permissionDialogTitle: PropTypes.string,
+     permissionDialogMessage: PropTypes.string,
+-    buttonPositive: PropTypes.string,
++    buttonPositive: PropTypes.string, 
+     topContent: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+     bottomContent: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+     notAuthorizedView: PropTypes.element,
+@@ -46,7 +46,7 @@ class QRCodeScanner extends Component {
+   static defaultProps = {
+     onRead: () => console.log('QR code scanned!'),
+     reactivate: false,
+-    reactivateTimeout: 0,
++    reactivateTimeout: 0, 
+     fadeIn: true,
+     showMarker: false,
+     cameraType: 'back',
+@@ -56,7 +56,7 @@ class QRCodeScanner extends Component {
+     checkAndroid6Permissions: false,
+     permissionDialogTitle: 'Info',
+     permissionDialogMessage: 'Need camera permission to scan QR codes',
+-    buttonPositive: 'OK',
++    buttonPositive: 'OK', 
+     notAuthorizedView: (
+       <View
+         style={{
+@@ -80,12 +80,14 @@ class QRCodeScanner extends Component {
+   constructor(props) {
+     super(props);
+     this.state = {
+-      scanning: false,
++      scanning: false, 
+       fadeInOpacity: new Animated.Value(0),
+       isAuthorized: false,
+       isAuthorizationChecked: false,
+       disableVibrationByUser: false,
++      device: null,
+     };
++    this._getDevice();
+ 
+     this._handleBarCodeRead = this._handleBarCodeRead.bind(this);
+   }
+@@ -95,6 +97,20 @@ class QRCodeScanner extends Component {
+     this._checkPermissions();
+   }
+ 
++  async _getDevice() {
++    try {
++      const devices = await Camera.getAvailableCameraDevices();
++      const device = devices.find(d => 
++        d.position === (this.props.cameraType === 'front' ? 'front' : 'back')
++      );
++      this.setState({ device });
++    } catch (error) {
++      console.error('Error getting camera device:', error);
++    }
++  }
++
++  componentDidUpdate(prevProps) {
++    if (prevProps.cameraType !== this.props.cameraType) {
+       this._getDevice();
+     }
+   }
+@@ -248,25 +264,35 @@ class QRCodeScanner extends Component {
+   }
+ 
+   _renderCameraComponent() {
++    const { device } = this.state;
++    
++    if (!device) {
++      return null;
++    }
++
+     const {
+       cameraProps,
+       flashMode,
+       cameraStyle,
+-      cameraType,
+     } = this.props;
+ 
+     return (
+       <Camera
+-        style={[styles.camera, cameraStyle]}
+-        onBarCodeRead={this._handleBarCodeRead}
+-        type={cameraType}
+-        flashMode={flashMode}
+-        barCodeTypes={[
+-          'aztec', 'code128', 'code39', 'code39mod43', 'code93', 'ean13', 'ean8', 'pdf417', 'qr', 'upce'
+-        ]}
+-        permissionDialogTitle={this.props.permissionDialogTitle}
+-        permissionDialogMessage={this.props.permissionDialogMessage}
+-        buttonPositive={this.props.buttonPositive}
++        style={[styles.camera, cameraStyle]} 
++        device={device}
++        isActive={this.state.scanning}
++        codeScanner={{
++          codeTypes: ['qr', 'ean-13', 'ean-8', 'code-128', 'code-39', 'code-93', 'codabar', 'upc-a', 'upc-e', 'pdf-417', 'aztec'],
++          onCodeScanned: (codes) => {
++            if (codes.length > 0) {
++              this._handleBarCodeRead({
++                data: codes[0].value,
++                type: codes[0].type,
++              });
++            }
++          },
++        }}
++        torch={flashMode === 'torch' ? 'on' : 'off'}
+         {...cameraProps}
+       />
+     );
+   }

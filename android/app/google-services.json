@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "837655896323",
+    "project_id": "bbherb-98b6d",
+    "storage_bucket": "bbherb-98b6d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837655896323:android:22961c335cb1ef68ab4936",
+        "android_client_info": {
+          "package_name": "com.brs.bbherb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuKF3u9mGCYpXMmZdbPdsaceeReQowpW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
